@@ -16,7 +16,7 @@
 <template name="userItemsList">
   {{#with user}}
     <h2>Items</h2>
-    <ul>
+    <ul class="list-group">
       {{#each userItem}}
         {{> item}} 
       {{/each}}
@@ -25,11 +25,12 @@
 </template>
  
 <template name="item">
-  <li>
-  {{#if editing}}
-    <input type="text" value="{{item}}" />
-  {{else}}
-    {{item}}
-  {{/if}}
+  <li class="list-group-item">
+    {{#if editing}}
+      <input type="text" value="{{item}}" />
+    {{else}}
+      {{item}}
+    {{/if}}
   </li> 
+  <button type="button" class="btn btn-danger btn-mini delete">Delete</button>
 </template>

@@ -28,7 +28,7 @@ if (Meteor.isClient) {
   };
 
   Template.item.events({
-    'click': function (e, t) {
+    'click .list-group-item': function (e, t) {
       Session.set("edit-" + t.data._id, true);
     },
     'keypress input': function (e, t) {
@@ -36,6 +36,9 @@ if (Meteor.isClient) {
         Items.update(t.data._id, { $set: { item: e.currentTarget.value }});
         Session.set("edit-" + t.data._id, false);
       }
+    },
+    'click .delete': function (e, t) {
+      Items.remove(t.data._id);
     }
   });
 
