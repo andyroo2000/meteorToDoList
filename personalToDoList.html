@@ -1,0 +1,32 @@
+<head>
+  <title>personalToDoList</title>
+</head>
+
+<body>
+  <h1>Personal ToDo List</h1>
+  {{> userItemsForm}}
+  {{> userItemsList}}
+</body>
+
+<template name="userItemsForm">
+    <input type="text" id="item">
+    <input type="button" value="Add Item" id="addItem">
+</template>
+
+<template name="userItemsList">
+  {{#with user}}
+    <h2>Items</h2>
+    <ul>
+      {{#each userItem}}
+        <li>
+        {{#if editing}}
+          <input type="text" value="{{item}}" />
+        {{else}}
+          {{item}}
+        {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/with}}
+</template>
+ 
