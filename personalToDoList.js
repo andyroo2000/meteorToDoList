@@ -22,6 +22,29 @@ if (Meteor.isClient) {
         item.value = "";
     }
   });
+
+  Template.item.editing = function() {
+    return Session.get("edit-" + this._id);
+  };
+
+  Template.item.events({
+    'click': function (e, t) {
+      Session.set("edit-" + t.data._id, true);
+    },
+    'keypress input': function (e, t) {
+      if (e.keyCode === 13) {
+        Items.update(t.data._id, { $set: { item: e.currentTarget.value }});
+        Session.set("edit-" + t.data._id, false);
+      }
+    }
+  });
+
+  Template.item.rendered = function () {
+    var input = this.find("input");
+    if (input) {
+      input.focus();
+    }
+  };
 }
 
 if (Meteor.isServer) {

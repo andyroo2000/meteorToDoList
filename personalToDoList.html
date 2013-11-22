@@ -18,15 +18,18 @@
     <h2>Items</h2>
     <ul>
       {{#each userItem}}
-        <li>
-        {{#if editing}}
-          <input type="text" value="{{item}}" />
-        {{else}}
-          {{item}}
-        {{/if}}
-        </li>
+        {{> item}} 
       {{/each}}
     </ul>
   {{/with}}
 </template>
  
+<template name="item">
+  <li>
+  {{#if editing}}
+    <input type="text" value="{{item}}" />
+  {{else}}
+    {{item}}
+  {{/if}}
+  </li> 
+</template>
