@@ -1,15 +1,14 @@
-Users = new Meteor.Collection('users');
 Items = new Meteor.Collection('items');
 
 if (Meteor.isClient) {
+  Meteor.subscribe("items");
+
   Template.userItemsList.helpers({
     userItem: function() {
       return Items.find();
-    },
-    user: function() {
-      return Users.findOne();
     }
   });
+
 
   Template.userItemsForm.events({
     'click #addItem' : function(e, t) {
@@ -51,14 +50,12 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
+
   Meteor.startup(function () {
-    if(Users.find().count() === 0) {
-      Users.insert({
-        total: 120,
-        goal: 200
-      });
-    }
-    
+    Meteor.publish("items", function() {
+      return Items.find();
+    });
+
     if(Items.find().count() === 0) {
       Items.insert({
         item: 'buy some dental floss',
@@ -76,3 +73,4 @@ if (Meteor.isServer) {
 
 
 
+// http://andyroo2000-todo-list.meteor.com
