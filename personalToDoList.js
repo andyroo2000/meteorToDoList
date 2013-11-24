@@ -1,5 +1,17 @@
 Items = new Meteor.Collection('items');
 
+Items.allow({
+  insert: function (userId, doc) {
+    return (userId && doc.owner === userId);
+  },
+  update: function (userId, doc, fields, modifier) {
+    return doc.owner === userId;
+  },
+  remove: function (userId, doc) {
+    return doc.owner === userId;
+  }
+});
+
 if (Meteor.isClient) {
   Meteor.subscribe("items");
 
@@ -16,7 +28,8 @@ if (Meteor.isClient) {
         var el = t.find("#item");
         Items.insert({
           item: el.value,
-          date: new Date().toTimeString()
+          date: new Date().toTimeString(),
+          owner: Meteor.userId()
         });
         item.value = "";
     }
@@ -53,19 +66,8 @@ if (Meteor.isServer) {
 
   Meteor.startup(function () {
     Meteor.publish("items", function() {
-      return Items.find();
+      return Items.find({owner:this.userId});
     });
-
-    if(Items.find().count() === 0) {
-      Items.insert({
-        item: 'buy some dental floss',
-        date: new Date().toTimeString()
-      });
-      Items.insert({
-        item: 'drop off the laundry',
-        date: new Date().toTimeString()
-      });
-    }
 
   });
 
