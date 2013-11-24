@@ -5,7 +5,9 @@
 
 standard-app-packages
 preserve-inputs
-bootstrap
 accounts-facebook
 underscore
 accounts-ui
+less
+stylus
+bootstrap-3

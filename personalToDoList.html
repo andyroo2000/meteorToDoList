@@ -3,7 +3,9 @@
 </head>
 
 <body>
-  <p>{{loginButtons}}</p>
+  <div id="login">
+    {{loginButtons}}
+  </div>
   <h1>Personal ToDo List</h1>
   {{> userItemsForm}}
   {{> userItemsList}}
@@ -31,5 +33,5 @@
       {{item}}
     {{/if}}
   </li> 
-  <button type="button" class="btn btn-danger btn-mini delete">Delete</button>
+  <button type="button" class="btn btn-danger btn-xs delete">Delete</button>
 </template>
