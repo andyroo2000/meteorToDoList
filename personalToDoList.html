@@ -1,19 +1,24 @@
 <head>
   <title>personalToDoList</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
 </head>
 
 <body>
-  <div id="login">
-    {{loginButtons}}
+  <div class="container">
+    <div id="login">
+      {{loginButtons}}
+    </div>
+    <h1>Personal ToDo List</h1>
+    {{> userItemsForm}}
+    {{> userItemsList}}
   </div>
-  <h1>Personal ToDo List</h1>
-  {{> userItemsForm}}
-  {{> userItemsList}}
 </body>
 
 <template name="userItemsForm">
     <input type="text" id="item">
-    <input type="button" value="Add Item" id="addItem">
+    <input type="button" value="Add Item" id="addItem" class="btn-primary">
 </template>
 
 <template name="userItemsList">
@@ -32,6 +37,6 @@
     {{else}}
       {{item}}
     {{/if}}
+  <button type="button" class="btn btn-danger btn-xs delete"><span class="fa fa-minus-square"></span></button>
   </li> 
-  <button type="button" class="btn btn-danger btn-xs delete">Delete</button>
 </template>
